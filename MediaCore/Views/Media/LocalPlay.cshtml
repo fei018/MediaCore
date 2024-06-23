@@ -1,0 +1,41 @@
+﻿@model LocalMediaFile
+@{
+    string playUrl = "/media/dolocalplay";
+}
+
+<style>
+    video {
+        width: 100%;
+        object-fit: contain;
+        max-height: 600px;
+    }
+
+    .media-player-body {
+        margin: 10px auto;
+        text-align: center;
+        /* max-width:800px; */
+        /* max-height:600px; */
+    }
+</style>
+
+<div class="media-player-body">
+    @if (Model.MineTypeResult.PlayType == MediaCore.ViewModel.Common.MediaFilePlayTypeEnum.Video)
+    {
+        <video controls autoplay>
+            <source src="@playUrl/@Model.Id" type="@Model.MineTypeResult.MimeType" />
+            Your browser does not support "@Model.MineTypeResult.MimeType".
+        </video>
+    }
+    else
+    {
+        <audio controls autoplay>
+            <source src="@playUrl/@Model.Id" type="@Model.MineTypeResult.MimeType" />
+            Your browser does not support "@Model.MineTypeResult.MimeType".
+        </audio>
+    }
+
+    <p>
+        @Html.Raw(Model.FileName)
+    </p>
+    <button type="button" class="btn btn-light player-close" onclick="window.close();" style="margin-top:20px;">關閉</button>
+</div>

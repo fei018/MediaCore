@@ -1,0 +1,54 @@
+﻿@using MediaCore.ViewModel.LocalMedia
+@model List<LocalMediaFolder>
+@{
+    string localMeidaViewId = "localmedia" + Guid.NewGuid().ToString("N");
+    string localTop = "/media/localtop";
+    string localList = "/media/locallist";
+}
+
+<style>
+    .media-icon{
+        font-size:30px;
+    }
+    .media-icon.media-icon-blue {
+        color: #1d99f3;
+    }
+    .more-line-ellipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        word-break: break-all;
+    }
+</style>
+<script>
+    function getMediaFolderById(id) {
+        // if (id === undefined) {
+        //     $.get('@localTop', function (data) {
+        //         $('#@localMeidaViewId').html(data);
+        //     }, 'html');
+        //     return;
+        // }
+
+        $.get('@localList', { Id: id }, function (data) {
+            $('#@localMeidaViewId').html(data);
+        }, 'html');
+    }
+
+</script>
+
+<div style="width:auto;">
+    <div class="position-relative">
+        <div class="position-absolute bottom-0">
+            <a onclick="getMediaFolderById();"><i class="media-icon media-icon-blue media-icon-title fa fa-home" ></i></a>
+        </div>
+    </div>
+    <hr />
+    <div id="@localMeidaViewId">
+    </div>
+</div>
+
+<script>
+    getMediaFolderById();
+</script>

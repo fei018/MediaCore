@@ -1,0 +1,65 @@
+﻿@using MediaCore.ViewModel.LocalMedia
+@model LocalMediaFolder
+@inject LocalMediaScanner scanner
+@{
+    var subFolders = scanner.GetLocalMediaFolderStorage().Where(x => x.ParentId == Model.Id);
+    var subFiles = Model.Files;
+    string localPlay = "/media/localplay";
+}
+
+<div class="row g-3">
+    <div class="col-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <i class="media-icon media-icon-blue fa fa-level-up"></i>
+            </div>
+            <div class="card-body">
+                <a class="more-line-ellipsis" href="javascript:void(0);"
+                   onclick="getMediaFolderById('@Model.ParentId')">
+                    上一頁
+                </a>
+            </div>
+        </div>
+    </div>
+
+    @foreach (var folder in subFolders)
+    {
+        <div class="col-6">
+            <div class="card h-100">
+                <div class="card-header ">
+                    <i class="media-icon media-icon-blue fa fa-folder-o"></i>
+                </div>
+                <div class="card-body">
+                    <a class="overflow-visible" href="javascript:void(0);"
+                       onclick="getMediaFolderById('@folder.Id')">
+                        @Html.Raw(folder.FolderName)
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (subFiles.Count > 0)
+{
+    <hr />
+    <div class=""><i class="media-icon media-icon-blue media-icon-title fa fa-list" ></i></div>
+    <hr />
+    <div class="row g-3">
+        @foreach (var file in subFiles)
+        {
+            <div class="col-6">
+                <div class="card h-100">
+                    <div class="card-header ">
+                        <i class="media-icon media-icon-blue fa fa-play-circle"></i>
+                    </div>
+                    <div class="card-body">
+                        <a href="@localPlay/@file.Id" target="_blank">
+                            <span class="overflow-visible">@Html.Raw(file.FileName)</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

@@ -1,0 +1,24 @@
+﻿@using MediaCore.ViewModel.LocalMedia
+@model List<LocalMediaFolder>
+@{
+    var folders = Model; // top folders
+}
+
+<div class="row g-3">
+    @foreach (var folder in folders)
+    {
+        <div class="col-6">
+            <div class="card h-100">
+                <div class="card-header ">
+                    <i class="media-icon media-icon-blue fa fa-folder-o"></i>
+                </div>
+                <div class="card-body">
+                    <a class="more-line-ellipsis" href="javascript:void(0);"
+                       onclick="getMediaFolderById('@folder.Id')">
+                        @Html.Raw(folder.FolderName)
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

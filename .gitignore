@@ -1,0 +1,6 @@
+/appsettings.json
+bin/
+/MediaCore.Test/
+.vs/
+obj/
+publish/
