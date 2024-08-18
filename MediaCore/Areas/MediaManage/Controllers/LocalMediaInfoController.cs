@@ -207,12 +207,16 @@ namespace MediaCore.Controllers
         }
         #endregion
 
+        #region Export
         [ActionDescription("Sys.Export")]
         [HttpPost]
         public IActionResult ExportExcel(LocalMediaInfoListVM vm)
         {
             return vm.GetExportData();
         }
+        #endregion
+
+
 
     }
 }

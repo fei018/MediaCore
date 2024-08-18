@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using WalkingTec.Mvvm.Core;
-using static NPOI.HSSF.Util.HSSFColor;
 
 namespace MediaCore.ViewModel.LocalMedia
 {
@@ -91,7 +90,7 @@ namespace MediaCore.ViewModel.LocalMedia
                 }
                 else
                 {
-                    pattern= "*." + ext;
+                    pattern = "*." + ext;
                 }
 
                 var files = Directory.EnumerateFiles(sysfolderPath, pattern, SearchOption.TopDirectoryOnly).Order().ToList();
@@ -101,7 +100,7 @@ namespace MediaCore.ViewModel.LocalMedia
                     foreach (var file in files)
                     {
                         string fileExt = Path.GetExtension(file).TrimStart('.');
-                        
+
                         if (MediaFileMimeTypeHelper.TryGet(fileExt, out var mimeType))
                         {
                             var media = new LocalMediaFile(file, mimeType)
