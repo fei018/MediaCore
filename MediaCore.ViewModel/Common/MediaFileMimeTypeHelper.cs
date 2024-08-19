@@ -24,6 +24,8 @@ namespace MediaCore.ViewModel.Common
               //{"m3u8", "application/x-mpegURL" },
         };
 
+        private const string _defaultMime = "application/octet-stream";
+
         public static bool TryGet(string fileExtention, out MediaMimeTypeResult result)
         {
             result = new MediaMimeTypeResult();
@@ -43,6 +45,11 @@ namespace MediaCore.ViewModel.Common
                     result.PlayType = MediaFilePlayTypeEnum.Audio;
                 }
 
+                return true;
+            }
+            else
+            {
+                result.MimeType = _defaultMime;
                 return true;
             }
 

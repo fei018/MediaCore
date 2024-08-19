@@ -1,4 +1,5 @@
-﻿@model LocalMediaFile
+﻿@using MediaCore.ViewModel.Common
+@model LocalMediaFile
 @{
     string playUrl = "/media/dolocalplay";
 }
@@ -16,7 +17,7 @@
         text-align: center;
     }
 
-    @@media (width <= 600px){
+    @@media (width <= 600px) {
         video {
             max-width: 100%;
         }
@@ -24,21 +25,25 @@
 </style>
 
 <div class="media-player-body">
-    @if (Model.MineTypeResult.PlayType == MediaCore.ViewModel.Common.MediaFilePlayTypeEnum.Video)
+    @switch (Model.MineTypeResult.PlayType)
     {
-        <video controls autoplay>
-            <source src="@playUrl/@Model.Id" type="@Model.MineTypeResult.MimeType" />
-            Your browser does not support "@Model.MineTypeResult.MimeType".
-        </video>
-    }
-    else
-    {
-        <audio controls autoplay>
-            <source src="@playUrl/@Model.Id" type="@Model.MineTypeResult.MimeType" />
-            Your browser does not support "@Model.MineTypeResult.MimeType".
-        </audio>
-    }
+        case MediaFilePlayTypeEnum.Video:
+            <video controls autoplay>
+                <source src="@playUrl/@Model.Id" type="@Model.MineTypeResult.MimeType" />
+                Your browser does not support "@Model.MineTypeResult.MimeType".
+            </video>
+            break;
 
+        case MediaFilePlayTypeEnum.Audio:
+            <audio controls autoplay>
+                <source src="@playUrl/@Model.Id" type="@Model.MineTypeResult.MimeType" />
+                Your browser does not support "@Model.MineTypeResult.MimeType".
+            </audio>
+            break;
+
+        default:
+            break;
+    }
     <p>
         @Html.Raw(Model.FileName)
     </p>
