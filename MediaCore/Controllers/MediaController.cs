@@ -92,6 +92,20 @@ namespace MediaCore.Controllers
             var stream = System.IO.File.OpenRead(file.FileFullName);
             return File(stream, file.MineTypeResult.MimeType, file.FileName, true);
         }
+
+        public IActionResult Download(string id)
+        {
+            var scanner = Wtm.CreateVM<LocalMediaScanner>();
+            var files = scanner.GetLocalMediaFileStorage();
+            var file = files.Find(x => x.Id == id);
+            if (file == null)
+            {
+                return this.ErrorView("LocalMediaFile id is not found in LocalMediaFileStorage: " + id);
+            }
+
+            var stream = System.IO.File.OpenRead(file.FileFullName);
+            return File(stream, file.MineTypeResult.MimeType, file.FileName, true);
+        }
         #endregion
     }
 }

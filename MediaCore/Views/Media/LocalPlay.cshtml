@@ -2,6 +2,7 @@
 @model LocalMediaFile
 @{
     string playUrl = "/media/dolocalplay";
+    string downloadUrl = "/media/download";
 }
 
 <style>
@@ -32,6 +33,9 @@
                 <source src="@playUrl/@Model.Id" type="@Model.MineTypeResult.MimeType" />
                 Your browser does not support "@Model.MineTypeResult.MimeType".
             </video>
+            <p>
+                @Html.Raw(Model.FileName)
+            </p>
             break;
 
         case MediaFilePlayTypeEnum.Audio:
@@ -39,13 +43,15 @@
                 <source src="@playUrl/@Model.Id" type="@Model.MineTypeResult.MimeType" />
                 Your browser does not support "@Model.MineTypeResult.MimeType".
             </audio>
+            <p>
+                @Html.Raw(Model.FileName)
+            </p>
             break;
 
         default:
+            <h4>下载链接：</h4>
+            <a class="link-primary" href="@downloadUrl/@Model.Id">@Html.Raw(Model.FileName)</a>
             break;
     }
-    <p>
-        @Html.Raw(Model.FileName)
-    </p>
     <button type="button" class="btn btn-light player-close" onclick="window.close();" style="margin-top:20px;">關閉</button>
 </div>

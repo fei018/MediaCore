@@ -2,6 +2,7 @@
 {
     public enum MediaFilePlayTypeEnum
     {
+        Default,
         Video,
         Audio,
     }

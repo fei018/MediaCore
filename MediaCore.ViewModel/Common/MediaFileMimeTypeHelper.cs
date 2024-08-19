@@ -26,9 +26,9 @@ namespace MediaCore.ViewModel.Common
 
         private const string _defaultMime = "application/octet-stream";
 
-        public static bool TryGet(string fileExtention, out MediaMimeTypeResult result)
+        public static MediaMimeTypeResult TryGet(string fileExtention)
         {
-            result = new MediaMimeTypeResult();
+            MediaMimeTypeResult result = new MediaMimeTypeResult();
 
             var key = _mimetype.Keys.FirstOrDefault(x => x.ToLower() == fileExtention.ToLower());
             if (!string.IsNullOrEmpty(key))
@@ -44,16 +44,14 @@ namespace MediaCore.ViewModel.Common
                 {
                     result.PlayType = MediaFilePlayTypeEnum.Audio;
                 }
-
-                return true;
             }
             else
             {
                 result.MimeType = _defaultMime;
-                return true;
+                result.PlayType = MediaFilePlayTypeEnum.Default;
             }
 
-            return false;
+            return result;
         }
     }
 }

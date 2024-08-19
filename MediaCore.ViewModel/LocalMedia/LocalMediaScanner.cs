@@ -13,6 +13,9 @@ namespace MediaCore.ViewModel.LocalMedia
     {
         private static List<LocalMediaFolder> LocalMediaFolderStorage { get; set; }
 
+        /// <summary>
+        /// 保存所有文件，方便直接查找
+        /// </summary>
         private static List<LocalMediaFile> LocalMediaFileStorage { get; set; }
 
         // ---------
@@ -101,14 +104,13 @@ namespace MediaCore.ViewModel.LocalMedia
                     {
                         string fileExt = Path.GetExtension(file).TrimStart('.');
 
-                        if (MediaFileMimeTypeHelper.TryGet(fileExt, out var mimeType))
+                        var mimeTypeResult = MediaFileMimeTypeHelper.TryGet(fileExt);
+
+                        var media = new LocalMediaFile(file, mimeTypeResult)
                         {
-                            var media = new LocalMediaFile(file, mimeType)
-                            {
-                                Id = Guid.NewGuid().ToString(),
-                            };
-                            list.Add(media);
-                        }
+                            Id = Guid.NewGuid().ToString(),
+                        };
+                        list.Add(media);
                     }
                 }
             }
