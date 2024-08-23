@@ -1,10 +1,10 @@
-﻿@using MediaCore.ViewModel.LocalMedia
+﻿@using MediaCore.ViewModel.LocalMediaScan
 @model LocalMediaFolder
 @inject LocalMediaScanner scanner
 @{
     var subFolders = scanner.GetLocalMediaFolderStorage().Where(x => x.ParentId == Model.Id);
     var subFiles = Model.Files;
-    string localPlay = "/media/localplay";
+    string localPlay = "/localmedia/play";
 }
 
 <div class="row g-3">

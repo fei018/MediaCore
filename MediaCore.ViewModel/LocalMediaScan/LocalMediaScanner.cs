@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using WalkingTec.Mvvm.Core;
 
-namespace MediaCore.ViewModel.LocalMedia
+namespace MediaCore.ViewModel.LocalMediaScan
 {
     public class LocalMediaScanner : BaseVM
     {
@@ -27,21 +27,7 @@ namespace MediaCore.ViewModel.LocalMedia
         #region InitVM
         protected override void InitVM()
         {
-            //if (Wtm.ConfigInfo.AppSettings.TryGetValue("SysMediaFileExtention", out string ext))
-            //{
-            //    if (!string.IsNullOrWhiteSpace(ext))
-            //    {
-            //        if (ext.Contains(','))
-            //        {
-            //            _fileExtention = [.. ext.Split(',')];
-            //        }
-            //        else
-            //        {
-            //            _fileExtention = [ext];
-            //        }
-            //    }
-            //}
-
+            // 讀取 文件擴展名 配置
             var config = DC.Set<LocalMediaConfig>().AsNoTracking().SingleOrDefault();
             if (config != null && !string.IsNullOrWhiteSpace(config.MediaFileExtention))
             {
@@ -181,12 +167,13 @@ namespace MediaCore.ViewModel.LocalMedia
         }
         #endregion
 
-        #region public ReScan()
-        public void ReScan()
+        #region public ScanAll()
+        public void ScanAll()
         {
-            var rootDirs = DC.Set<LocalMediaInfo>().ToList();
+            // 讀取 數據庫設置的 文件夾路徑
+            var mediaInfos = DC.Set<LocalMediaInfo>().ToList();
 
-            if (rootDirs == null || rootDirs.Count <= 0)
+            if (mediaInfos == null)
             {
                 throw new ArgumentException(nameof(LocalMediaInfo) + " is null of database.");
             }
@@ -200,18 +187,19 @@ namespace MediaCore.ViewModel.LocalMedia
                 LocalMediaFolderStorage.Clear();
             }
 
-            for (int i = 0; i < rootDirs.Count; i++)
+            for (int i = 0; i < mediaInfos.Count; i++)
             {
-                if (!string.IsNullOrEmpty(rootDirs[i].MediaRootPath))
+                var rootPath = mediaInfos[i].MediaRootPath;
+                if (!string.IsNullOrEmpty(rootPath) && Directory.Exists(rootPath))
                 {
-                    var folderList = ToScan(rootDirs[i].MediaRootPath);
+                    var folderList = ToScan(rootPath);
                     LocalMediaFolderStorage.AddRange(folderList);
                 }
             }
 
             if (LocalMediaFolderStorage.Count <= 0)
             {
-                throw new Exception("ReScan():" + nameof(LocalMediaFolderStorage) + ".Count is 0.");
+                throw new Exception("ScanAll():" + nameof(LocalMediaFolderStorage) + ".Count is 0.");
             }
 
             if (LocalMediaFileStorage == null)
@@ -237,7 +225,7 @@ namespace MediaCore.ViewModel.LocalMedia
         {
             if (LocalMediaFolderStorage == null || LocalMediaFolderStorage.Count <= 0)
             {
-                ReScan();
+                ScanAll();
             }
 
             return LocalMediaFolderStorage;

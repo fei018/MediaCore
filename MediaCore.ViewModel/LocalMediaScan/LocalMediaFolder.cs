@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MediaCore.ViewModel.LocalMedia
+namespace MediaCore.ViewModel.LocalMediaScan
 {
     public class LocalMediaFolder
     {

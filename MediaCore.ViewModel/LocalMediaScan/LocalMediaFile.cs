@@ -1,10 +1,8 @@
 ﻿using MediaCore.ViewModel.Common;
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
-using System.Text.Json;
 
-namespace MediaCore.ViewModel.LocalMedia
+namespace MediaCore.ViewModel.LocalMediaScan
 {
     public class LocalMediaFile
     {

@@ -17,14 +17,14 @@ namespace MediaCore.ViewModel.LocalMediaInfoVMs
         {
             return new List<GridAction>
             {
-                this.MakeStandardAction("LocalMediaInfo", GridActionStandardTypesEnum.Create, Localizer["Sys.Create"],"LocalMedia", dialogWidth: 800),
-                this.MakeStandardAction("LocalMediaInfo", GridActionStandardTypesEnum.Edit, Localizer["Sys.Edit"], "LocalMedia", dialogWidth: 800),
-                this.MakeStandardAction("LocalMediaInfo", GridActionStandardTypesEnum.Delete, Localizer["Sys.Delete"], "LocalMedia", dialogWidth: 800),
-                this.MakeStandardAction("LocalMediaInfo", GridActionStandardTypesEnum.Details, Localizer["Sys.Details"], "LocalMedia", dialogWidth: 800),
-                this.MakeStandardAction("LocalMediaInfo", GridActionStandardTypesEnum.BatchEdit, Localizer["Sys.BatchEdit"], "LocalMedia", dialogWidth: 800),
-                this.MakeStandardAction("LocalMediaInfo", GridActionStandardTypesEnum.BatchDelete, Localizer["Sys.BatchDelete"], "LocalMedia", dialogWidth: 800),
-                this.MakeStandardAction("LocalMediaInfo", GridActionStandardTypesEnum.Import, Localizer["Sys.Import"], "LocalMedia", dialogWidth: 800),
-                this.MakeStandardAction("LocalMediaInfo", GridActionStandardTypesEnum.ExportExcel, Localizer["Sys.Export"], "LocalMedia"),
+                this.MakeStandardAction("LocalMediaInfo", GridActionStandardTypesEnum.Create, Localizer["Sys.Create"],"MediaManage", dialogWidth: 800),
+                this.MakeStandardAction("LocalMediaInfo", GridActionStandardTypesEnum.Edit, Localizer["Sys.Edit"], "MediaManage", dialogWidth: 800),
+                this.MakeStandardAction("LocalMediaInfo", GridActionStandardTypesEnum.Delete, Localizer["Sys.Delete"], "MediaManage", dialogWidth: 800),
+                this.MakeStandardAction("LocalMediaInfo", GridActionStandardTypesEnum.Details, Localizer["Sys.Details"], "MediaManage", dialogWidth: 800),
+                this.MakeStandardAction("LocalMediaInfo", GridActionStandardTypesEnum.BatchEdit, Localizer["Sys.BatchEdit"], "MediaManage", dialogWidth: 800),
+                this.MakeStandardAction("LocalMediaInfo", GridActionStandardTypesEnum.BatchDelete, Localizer["Sys.BatchDelete"], "MediaManage", dialogWidth: 800),
+                this.MakeStandardAction("LocalMediaInfo", GridActionStandardTypesEnum.Import, Localizer["Sys.Import"], "MediaManage", dialogWidth: 800),
+                this.MakeStandardAction("LocalMediaInfo", GridActionStandardTypesEnum.ExportExcel, Localizer["Sys.Export"], "MediaManage"),
             };
         }
 

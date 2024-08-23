@@ -1,9 +1,9 @@
-﻿@using MediaCore.ViewModel.LocalMedia
+﻿@using MediaCore.ViewModel.LocalMediaScan
 @model List<LocalMediaFolder>
 @{
     string localMeidaViewId = "localmedia" + Guid.NewGuid().ToString("N");
-    string localTop = "/media/localtop";
-    string localList = "/media/locallist";
+    string localTop = "/localmedia/top";
+    string localList = "/localmedia/list";
 }
 
 <style>

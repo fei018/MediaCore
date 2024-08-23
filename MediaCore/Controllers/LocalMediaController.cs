@@ -1,5 +1,5 @@
 ﻿using MediaCore.Extentions;
-using MediaCore.ViewModel.LocalMedia;
+using MediaCore.ViewModel.LocalMediaScan;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Linq;
@@ -10,17 +10,17 @@ namespace MediaCore.Controllers
 {
     [NoLog]
     [Public]
-    public class MediaController : BaseController
+    public class LocalMediaController : BaseController
     {
         #region Local
-        public IActionResult LocalIndex()
+        public IActionResult Index()
         {
             var scanner = Wtm.CreateVM<LocalMediaScanner>();
             var vm = scanner.GetLocalMediaFolderStorage();
             return View(vm);
         }
 
-        public IActionResult LocalTop()
+        public IActionResult Top()
         {
             var scanner = Wtm.CreateVM<LocalMediaScanner>();
             var list = scanner.GetLocalMediaFolderStorage();
@@ -33,7 +33,7 @@ namespace MediaCore.Controllers
         /// </summary>
         /// <param name="id">LocalMediaFolder id</param>
         /// <returns></returns>
-        public IActionResult LocalList(string id)
+        public IActionResult List(string id)
         {
             var scanner = Wtm.CreateVM<LocalMediaScanner>();
             var list = scanner.GetLocalMediaFolderStorage();
@@ -41,7 +41,7 @@ namespace MediaCore.Controllers
             if (string.IsNullOrEmpty(id))
             {
                 var tops = list.Where(x => x.IsRoot).ToList();
-                return PartialView("LocalTop", tops);
+                return PartialView("Top", tops);
             }
 
             var vm = list.SingleOrDefault(x => x.Id == id);
@@ -61,7 +61,7 @@ namespace MediaCore.Controllers
         /// </summary>
         /// <param name="id">LocalMediaFile id</param>
         /// <returns></returns>
-        public IActionResult LocalPlay(string id)
+        public IActionResult Play(string id)
         {
             var scanner = Wtm.CreateVM<LocalMediaScanner>();
 
@@ -79,7 +79,7 @@ namespace MediaCore.Controllers
         /// </summary>
         /// <param name="id">LocalMediaFile id</param>
         /// <returns></returns>
-        public IActionResult DoLocalPlay(string id)
+        public IActionResult DoPlay(string id)
         {
             var scanner = Wtm.CreateVM<LocalMediaScanner>();
             var files = scanner.GetLocalMediaFileStorage();
